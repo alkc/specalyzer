@@ -1,0 +1,31 @@
+Package: specalyzer
+Type: Package
+Title: Exploratory data analysis and visualization of a hyperspectral plant phenotying data
+Version: 1.0.0
+Author: Alexander Koc
+Maintainer: Alexander Koc <alexander.koc@slu.se>
+Description: Package for exploration and visualization of plant spectral data
+Imports:
+    magrittr,
+    dplyr,
+    reshape2,
+    asdreader
+Depends:
+    hsdar,
+    plotly
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
+Collate: 
+    'field-plots.R'
+    'functionals.R'
+    'plantspec.R'
+    'plot-spectral-pca.R'
+    'util.R'
+    'plot-spectrum.R'
+    'plot-vegindex.R'
+    'plot-wavelength.R'
+    'read-spectral-data.R'
+    'spectral-file-processing.R'
+    'veg-index.R'

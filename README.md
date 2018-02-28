@@ -19,3 +19,7 @@ install.packages("shinyjs")
 This is achieved by setting the `user_data_base` variable in the top of the `server.R` file to a desired path.
 
 The Shiny app is ready to run now!
+
+## Contact
+
+Send feedback to alexander.koc@slu.se and aakash.chawade@slu.se

@@ -61,7 +61,7 @@ process_vegindex_plot <- function(p, plot_data, by_attribute, type, index) {
 plot_vegindex_boxplot <- function(plot_data, ...) {
   p <- plotly::plot_ly() %>%
     plotly::add_boxplot(y = plot_data[,2], x = plot_data[,3],
-                        color = as.character(plot_data[,3]), ...)
+                        split = as.character(plot_data[,3]), ...)
   p
 }
 

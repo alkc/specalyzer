@@ -13,6 +13,7 @@ install.packages("DT")
 install.packages("readr")
 install.packages("shiny")
 install.packages("shinyjs")
+install.packages("V8")
 ```
 3. **Configure where Specalyzer should save user-uploaded data.**
 

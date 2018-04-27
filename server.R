@@ -12,6 +12,7 @@ source("server-process-spectral-data.R")
 source("server-process-fieldmap-data.R")
 source("server-get-text-summary.R")
 source("util.R")
+source("server-config.R")
 
 # options(shiny.fullstacktrace = TRUE)
 
@@ -19,8 +20,6 @@ available_indices <- specalyzer::vegindex()
 
 # dev_mode <- FALSE
 
-user_data_base <- file.path("/path/to/specalyzer/user-data-dir")
-example_data_path <- "/path/to/specalyzer-example-data.zip"
 
 shinyServer(function(input, output, session) {
   user_data <- reactiveValues(id = NULL, path = NULL, available_samples = NULL, available_fieldmaps = NULL)

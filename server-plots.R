@@ -57,6 +57,15 @@ get_vi_plot <- function(dataset, input, output) {
     vi <- input$vi_index_select
   }
   
+  # TODO: Fix this up:
+  # If call to vegindex returns error or a dataset of all NAs, then tell user
+  # their data does not support the calculating of selected vegetation index
+  validate(
+    need(
+      all(is.na(try(specalyzer::vegindex(dataset, vi), silent = TRUE))) == FALSE,
+      paste('Your data does not contain reflectance at the neccessary wavelengths to calculate:', vi))
+    )
+  
   if (input$vi_plot_scatter_size != "") {
     by_size <- get_attr_column(dataset, input$vi_plot_scatter_size)
   } else {

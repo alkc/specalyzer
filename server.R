@@ -221,7 +221,14 @@ shinyServer(function(input, output, session) {
   })
   
   output$pca_plot <- renderPlotly({
-    get_pca_plot(data(), input, output)
+    if(input$plot_pca_type == "attributes") {
+      get_pca_plot(data(), input, output)
+    } else if(input$plot_pca_type == "outliers") {
+      get_outlier_plot(data(), input, output)
+    } else {
+      stop("invalid pca plot type")
+    }
+    
   })
   
   output$field_matrix_plot <- renderPlotly({

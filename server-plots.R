@@ -157,8 +157,6 @@ get_attribute_field_plot <- function(dataset, attribute, field_layout_matrix) {
 }
 
 get_pca_plot <- function(dataset, input, output) {
- 
- 
   color <- if(input$plot_pca_color != "") input$plot_pca_color else NULL
   size <-  if(input$plot_pca_size != "") input$plot_pca_size else NULL
   spec_pca <- get_spectral_pca(dataset, scale. = input$plot_pca_scale, 
@@ -166,4 +164,10 @@ get_pca_plot <- function(dataset, input, output) {
   plot_spectral_pca(spec_pca, data = dataset, color = color, size = size) %>% 
     plotly::layout(title = input$plot_pca_title)
   
+}
+
+get_outlier_plot <- function(dataset, input, output) {
+  plot_outliers(dataset, scale. = input$plot_pca_scale, 
+                center = input$plot_pca_center) %>% 
+    plotly::layout(title = input$plot_pca_title)
 }

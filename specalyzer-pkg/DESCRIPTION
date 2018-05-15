@@ -21,6 +21,7 @@ Collate:
     'field-plots.R'
     'functionals.R'
     'plantspec.R'
+    'plot-outliers.R'
     'plot-spectral-pca.R'
     'util.R'
     'plot-spectrum.R'

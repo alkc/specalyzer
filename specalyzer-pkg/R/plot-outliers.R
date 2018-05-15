@@ -1,8 +1,8 @@
 #' @export
-get_outlier_plot <- function(speclib_data, sd_threshold = 3, ...) {
-  prcomp_object <- prcomp(spectra(speclib_data), ...)
+plot_outliers <- function(speclib_data, sd_threshold = 3, ...) {
+  prcomp_object <- get_spectral_pca(speclib_data, ...)
   plot_data <- data.frame(
-    sample_ids = as.character(idSpeclib(spectral_data)),
+    sample_ids = as.character(idSpeclib(speclib_data)),
     PC1 = prcomp_object$x[,1],
     PC2 = prcomp_object$x[,2],
     is_outlier = rep(NA, nrow(prcomp_object$x))

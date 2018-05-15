@@ -1,6 +1,6 @@
 get_pca_plot_ui <- function() {
   fluidPage(
-    titlePanel("Spectral Plots"),
+    titlePanel("PCA Plots"),
     
     sidebarLayout(
       

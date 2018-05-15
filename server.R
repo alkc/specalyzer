@@ -23,6 +23,15 @@ available_indices <- specalyzer::vegindex()
 
 shinyServer(function(input, output, session) {
   user_data <- reactiveValues(id = NULL, path = NULL, available_samples = NULL, available_fieldmaps = NULL)
+  
+  output$welcome_text <- renderUI({
+    welcome_text <- includeMarkdown("content/welcome.md")
+    if(data_exists()) {
+      welcome_text <- get_text_summary(raw_data())
+    }
+    welcome_text
+  })
+  
   output$download_example_data <- downloadHandler(
       filename <- function(){
           paste("specalyzer-example-data", "zip", sep = ".")
@@ -57,12 +66,14 @@ shinyServer(function(input, output, session) {
     user_data$id <- new_unique_id
     user_data$path <- file.path(user_data_path, "userdata.rds")
     user_data$available_samples <- hsdar::idSpeclib(speclib)
+    user_data$has_uploaded_fieldmaps <- FALSE
     if (!is.null(input$fieldmap_upload)) {
       uploaded_maps <- input$fieldmap_upload
       fieldmap_names <- unlist(uploaded_maps[['name']])
       fieldmap_paths <- uploaded_maps[['datapath']]
       names(fieldmap_paths) <- fieldmap_names
       updateSelectInput(session, inputId = "plot_field_matrix", choices = fieldmap_paths)
+      user_data$has_uploaded_fieldmaps <- TRUE
     }    
   })
   
@@ -202,6 +213,10 @@ shinyServer(function(input, output, session) {
   })
   
   output$vi_plot <- renderPlotly({
+    
+    req(input$vi_plot_attribute_select)
+    
+
     get_vi_plot(data(), input, output)
   })
   
@@ -210,6 +225,10 @@ shinyServer(function(input, output, session) {
   })
   
   output$field_matrix_plot <- renderPlotly({
+    
+    validate(
+      need(user_data$has_uploaded_fieldmaps == TRUE,
+           "No fieldmaps have been uploaded. "))
     
     if(input$plot_field_type == 'attribute') {
       
@@ -230,15 +249,6 @@ shinyServer(function(input, output, session) {
   
   # Dynamic ui code ---------------------------------------------------------
 
-
- output$welcome_text <- renderUI({
-    welcome_text <- includeMarkdown("content/welcome.md")
-    if(data_exists()) {
-      welcome_text <- get_text_summary(raw_data())
-    }
-    welcome_text
-  })
-  
     observeEvent(input$setup_subset_restore_defaults, {
       # print(all_available_attributes())
       updateSelectInput(session, "setup_subset_select_rows", choices = all_available_samples())

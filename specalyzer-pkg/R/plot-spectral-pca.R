@@ -1,5 +1,5 @@
 #' @export
-plot_spectral_pca <- function(prcomp_object, data = NULL, color = NULL, size = NULL) {
+plot_spectral_pca <- function(prcomp_object, data = NULL, color = NULL, size = NULL,...) {
 
   xaxis_title <- prcomp_object %>% get_pca_plot_axis_title(1)
   yaxis_title <- prcomp_object %>% get_pca_plot_axis_title(2)
@@ -42,7 +42,7 @@ plot_spectral_pca <- function(prcomp_object, data = NULL, color = NULL, size = N
                     size = size_formula,
                     type = 'scatter',
                     mode = 'markers',
-                    hoverinfo = "text+color+x+y")
+                    hoverinfo = "text+color+x+y", ...)
 
 
     p %>% plotly::layout(

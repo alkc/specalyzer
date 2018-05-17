@@ -163,7 +163,6 @@ get_pca_plot <- function(dataset, input, output) {
                                center = input$plot_pca_center)
   plot_spectral_pca(spec_pca, data = dataset, color = color, size = size) %>% 
     plotly::layout(title = input$plot_pca_title)
-  
 }
 
 get_outlier_plot <- function(dataset, input, output) {
@@ -172,4 +171,11 @@ get_outlier_plot <- function(dataset, input, output) {
                 scale. = input$plot_pca_scale, 
                 center = input$plot_pca_center) %>% 
     plotly::layout(title = input$plot_pca_title)
+}
+
+get_vegindex_selection_plot <- function(dataset, input,output) {
+  p <- plot_vegindex_selection(dataset, 
+                               attribute = input$viselection_attr_select,
+                               attribute_type = input$viselection_attr_type)
+  p
 }

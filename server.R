@@ -213,12 +213,14 @@ shinyServer(function(input, output, session) {
   })
   
   output$vi_plot <- renderPlotly({
-    
     req(input$vi_plot_attribute_select)
-    
-
     get_vi_plot(data(), input, output)
   })
+  
+  output$viselection_plot <- renderPlotly({
+    req(input$viselection_attr_select)
+    get_vegindex_selection_plot(data(), input,output)
+  }) 
   
   output$pca_plot <- renderPlotly({
     if(input$plot_pca_type == "attributes") {
@@ -228,7 +230,7 @@ shinyServer(function(input, output, session) {
     } else {
       stop("invalid pca plot type")
     }
-    
+
   })
   
   output$field_matrix_plot <- renderPlotly({
@@ -394,6 +396,7 @@ shinyServer(function(input, output, session) {
                                 "spec_plot_attribute_select", 
                                 "vi_plot_scatter_size", 
                                 "vi_plot_attribute_select", 
+                                "viselection_attr_select",
                                 "table_attribute_column_select")
     sapply(select_attribute_menus, function(menu) 
       updateSelectInput(session, menu, 

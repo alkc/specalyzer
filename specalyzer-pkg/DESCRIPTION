@@ -25,6 +25,7 @@ Collate:
     'plot-spectral-pca.R'
     'util.R'
     'plot-spectrum.R'
+    'plot-vegindex-selection.R'
     'plot-vegindex.R'
     'plot-wavelength.R'
     'read-spectral-data.R'

@@ -1,3 +1,4 @@
+#' @export
 plot_vegindex_selection <- function(speclib_data, attribute,
                                     attribute_type = c("continuous", "categorical")) {
 

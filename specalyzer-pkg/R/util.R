@@ -102,3 +102,7 @@ get_all_NA_cols <- function(table) {
   columns_to_keep <- unlist(columns_to_keep)
   columns_to_keep
 }
+
+calculate_all_vegindexes <- function(speclib_data) {
+  specalyzer::vegindex(speclib_data, specalyzer::vegindex())
+}

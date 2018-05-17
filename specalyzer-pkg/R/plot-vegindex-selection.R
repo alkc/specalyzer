@@ -9,7 +9,7 @@ plot_vegindex_selection <- function(speclib_data, attribute,
   # Remove all only-NAs columns from vegindex table:
   # TODO: Add warning when index columns removed.
   vi_table <- vi_table[,!get_all_NA_cols(vi_table)]
-  available_indices <- colnames(vi_table)
+  #available_indices <- colnames(vi_table)
   # If response variable is continuous, then calculate the correlation
   # coefficient between each available index (supported by data) and the
   # attribute of interest, and visualize as a barplot.
@@ -45,7 +45,7 @@ get_vegindex_attribute_correlations <- function(vi_table,attribute_vector, corr_
   )
   nbr_indices <- ncol(vi_table)
   for(i in seq(nbr_indices)) {
-    plot_data[i,2] <- cor(vi_table[,i], attribute_vector, method = corr_method)
+    plot_data[i,2] <- cor(vi_table[,i], attribute_vector, method = corr_method, use = "complete.obs")
   }
   plot_data
 }
@@ -57,7 +57,7 @@ get_significant_indices <- function(vi_table, attribute_vector) {
                           log_ten_p = rep(NA, nbr_indices))
   for(i in seq(nbr_indices)) {
     predictor_index <- vi_table[,i]
-    linear_model <- lm(predictor_index ~ attribute_vector)
+    linear_model <- lm(predictor_index ~ as.factor(attribute_vector))
     linear_model <- anova(linear_model)
     p_value <- linear_model[["Pr(>F)"]][1]
     plot_data[i,2] <- p_value

@@ -167,7 +167,9 @@ get_pca_plot <- function(dataset, input, output) {
 }
 
 get_outlier_plot <- function(dataset, input, output) {
-  plot_outliers(dataset, scale. = input$plot_pca_scale, 
+  plot_outliers(dataset, 
+                sd_threshold = input$plot_pca_outlier_sd,
+                scale. = input$plot_pca_scale, 
                 center = input$plot_pca_center) %>% 
     plotly::layout(title = input$plot_pca_title)
 }

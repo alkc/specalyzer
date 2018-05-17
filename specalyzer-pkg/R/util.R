@@ -15,7 +15,6 @@ is_attrib_continuous <- function(data, attribute) {
 # this function identifies those columns and removes them from the dataset
 preprocess_spectra_for_pca <- function(spectral_matrix, wavelength) {
   keepers <- apply(spectral_matrix, 2, function(x) var(x) != 0)
-
   if(any(keepers == FALSE)) {
     removed_bands <- paste(wavelength[!keepers], collapse = ", ")
     msg <- paste0("Following bands were found to show no variance and were removed: ", removed_bands)
@@ -95,4 +94,11 @@ get_masked_spectra <- function(data) {
   }
   spectral_data <- cbind(spectral_data, NA_cols)
   spectral_data
+}
+
+get_all_NA_cols <- function(table) {
+  # Make bool. vector that lists columns in table only containing NAs as "FALSE"
+  columns_to_keep <- apply(table, 2, function(x) all(is.na(x)))
+  columns_to_keep <- unlist(columns_to_keep)
+  columns_to_keep
 }

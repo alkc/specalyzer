@@ -1,6 +1,7 @@
 library(plotly)
 library(shiny)
 source("ui-spectral-plots.R")
+source("ui-vegindex-selection-plots.R")
 source("ui-vegindex-plots.R")
 source("ui-datatables.R")
 source("ui-pca-plots.R")
@@ -25,8 +26,10 @@ shinyUI(
                navbarMenu(
                  title = "Visualize",
                           tabPanel("Spectral Plots", get_spectral_plot_ui()),
-                          tabPanel("Vegetation index plots", get_vegindex_plot_ui()),
                           tabPanel("PCA plots", get_pca_plot_ui()),
+                          tabPanel("Vegetation index selection", get_vegindex_selection_plot_ui()),
+                          tabPanel("Vegetation index plots", get_vegindex_plot_ui()),
+                          
                           tabPanel("Fieldmaps", get_field_matrix_ui()),
                           tabPanel("Tables", get_datatables_ui())
                  ),

@@ -397,7 +397,8 @@ shinyServer(function(input, output, session) {
                                 "vi_plot_scatter_size", 
                                 "vi_plot_attribute_select", 
                                 "viselection_attr_select",
-                                "table_attribute_column_select")
+                                "table_attribute_column_select",
+                                "vi_plot_boxplot_attribute_splitby")
     sapply(select_attribute_menus, function(menu) 
       updateSelectInput(session, menu, 
                         choices = c("Select an attribute" = "", selectable_attribs)))

@@ -1,3 +1,4 @@
+# TODO: Remove this func
 #' @export
 plot_vegindex <- function(data, index, by_attribute = NULL, type = 'all', ...) {
 
@@ -20,7 +21,7 @@ plot_vegindex <- function(data, index, by_attribute = NULL, type = 'all', ...) {
     p <- plot_vegindex_by_file(plot_data, by_attribute)
 
   } else if (type == 'boxplot') {
-    p <- plot_vegindex_boxplot(plot_data, by_attribute, ...)
+    p <- plot_vegindex_boxplot_1(plot_data, by_attribute, ...)
   } else if (type == 'scatter') {
     p <- plot_vegindex_scatter(plot_data, by_attribute, ...)
   } else {
@@ -31,7 +32,7 @@ plot_vegindex <- function(data, index, by_attribute = NULL, type = 'all', ...) {
 
 }
 
-
+# TODO: Type out some comments here
 process_vegindex_plot <- function(p, plot_data, by_attribute, type, index) {
 
   sample_plot_xaxis <- list(
@@ -58,7 +59,32 @@ process_vegindex_plot <- function(p, plot_data, by_attribute, type, index) {
     )
 }
 
-plot_vegindex_boxplot <- function(plot_data, ...) {
+plot_vegindex_boxplot <- function(speclib_data, index, group_by_attribute,
+                                  split_by_attribute = NULL, orientation = 'h', ...) {
+
+  main_attribute_name <- group_by_attribute
+  main_attribute_vector <- get_attr_column(speclib_data, main_attribute_name)
+  index_vector <- specalyzer::vegindex(speclib_data, index) %>% unlist()
+  split_attribute_vector <- NULL
+  split_attribute_name <- NULL
+  if(!is.null(split_by_attribute)) {
+    split_attribute_vector <- get_attr_column(speclib_data, split_by_attribute)
+    split_attribute_name <- split_by_attribute
+  }
+  if(orientation == 'v') {
+    p <- plot_ly(y=index_vector,x=main_attribute_vector,
+                 split = split_attribute_vector, type='box',...)
+  } else if(orientation == 'h') {
+    p <- plot_ly(x=index_vector,y=main_attribute_vector,
+                 split = split_attribute_vector, type='box',...)
+  } else {
+    stop("Invalid boxplot orientation")
+    }
+  p %>% layout(boxmode = "group")
+}
+
+# TODO: Make away with this
+plot_vegindex_boxplot_1 <- function(plot_data, ...) {
   p <- plotly::plot_ly() %>%
     plotly::add_boxplot(y = plot_data[,2], x = plot_data[,3],
                         split = as.character(plot_data[,3]), ...)
@@ -116,4 +142,3 @@ plot_vegindex_by_file <- function(plot_data, by_attribute = NULL, ...) {
                                                  color = colors, text = hovertext, ...)
   p
 }
-

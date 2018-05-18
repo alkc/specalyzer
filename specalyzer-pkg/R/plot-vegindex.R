@@ -59,6 +59,7 @@ process_vegindex_plot <- function(p, plot_data, by_attribute, type, index) {
     )
 }
 
+#'@export
 plot_vegindex_boxplot <- function(speclib_data, index, group_by_attribute,
                                   split_by_attribute = NULL, orientation = 'h', ...) {
 

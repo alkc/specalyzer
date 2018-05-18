@@ -39,4 +39,4 @@ get_spectral_data_description <- function(data) {
 }
 
 # TODO: Get this done
-get_fieldmap_data_description <- fucntion() {}
+get_fieldmap_data_description <- function() {}

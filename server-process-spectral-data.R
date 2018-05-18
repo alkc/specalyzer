@@ -10,6 +10,7 @@ process_spectral_data <- function(input_files, file_format, project_id) {
   spectral_data
 }
 
+# TODO: Sort this one out.
 process_attribute_data <- function(input_file, spectral_data) {
   
   # This function reads the attribute data and pokes it a bit to see if the rows
@@ -27,17 +28,20 @@ process_attribute_data <- function(input_file, spectral_data) {
   
   # Require a column named 'filename' in the attrib table
   if(!"filename" %in% colnames(attrib_data)) {
-    stop("'filename' column missing from attribute data")
+    shiny::showNotification("'filename' column is missing from attribute table", type = "error")
+    return(spectral_data)
   }
   
   # Throw an error if the filename column contains non-unique entries
   if(any(table(attrib_data[['filename']]) > 1)) {
-    stop("filenames in the 'filename' columns must be unique")
+    shiny::showNotification("filenames in the 'filename' columns must be unique", type = "error")
+    return(spectral_data)
   }
   
   # Check if filenames match between attrib and spectral data
   if(!spectral_data_matches_attribute_data(spectral_data, attrib_data)) {
-    stop("Filenames in the attribute table must match the filenames of the spectral files")
+    shiny::showNotification("Filenames in the attribute table must match the filenames of the spectral files", type = "error")
+    return(spectral_data)
   }
   
   # Sort attrib table rows using the ordering of files in spectral_data as template
@@ -46,7 +50,7 @@ process_attribute_data <- function(input_file, spectral_data) {
   # Move filename column to row names as it is no longer needed
 
   rownames(attrib_data) <- attrib_data %>% pull(filename) %>% tools::file_path_sans_ext()
-  idSpeclib(spectral_data) <- idSpeclib(spectral_data) %>% tools::file_path_sans_ext()
+  # idSpeclib(spectral_data) <- idSpeclib(spectral_data) %>% tools::file_path_sans_ext()
   hsdar::attribute(spectral_data) <- attrib_data[,-1]
   spectral_data
 }

@@ -16,7 +16,7 @@ get_text_summary <- function(data) {
 
 get_attribute_data_description <- function(data) {
   if(length(hsdar::attribute(data)) == 0) {
-    output <- p("No attribute data was detected in the sample") 
+    output <- p("No attribute data is available for this data.") 
   } else {
   attrib_data <- hsdar::attribute(data)
   attrib_names <- colnames(attrib_data)

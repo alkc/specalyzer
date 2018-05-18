@@ -22,7 +22,8 @@ available_indices <- specalyzer::vegindex()
 
 
 shinyServer(function(input, output, session) {
-  user_data <- reactiveValues(id = NULL, path = NULL, available_samples = NULL, available_fieldmaps = NULL)
+  user_data <- reactiveValues(id = NULL, path = NULL, available_samples = NULL, 
+                              available_fieldmaps = NULL)
   
   output$welcome_text <- renderUI({
     welcome_text <- includeMarkdown("content/welcome.md")
@@ -46,7 +47,6 @@ shinyServer(function(input, output, session) {
   })
   
   # File upload -------------------------------------------------------------
-  
   observeEvent(input$spectral_data_upload_button, {
     new_unique_id <- stringi::stri_rand_strings(1, 6)
     # Create speclib object
@@ -54,7 +54,6 @@ shinyServer(function(input, output, session) {
       input_files = input$spectral_data_upload,
       file_format = input$spectral_data_type
     )
-    
     if (!is.null(input$attrib_data_upload)) {
       speclib <- process_attribute_data(input$attrib_data_upload, speclib)      
     }
@@ -89,7 +88,6 @@ shinyServer(function(input, output, session) {
     # print(rds_path)
     readRDS(rds_path)
   })
-  
   # the data reactive element returns the uploaded data with any modifications
   # specified by the user in the settings/subset menu.
   data <- reactive({
@@ -121,11 +119,9 @@ shinyServer(function(input, output, session) {
         dataset <- mask_(dataset, mask_intervals)
       }
       # Subset attribute columns
-      selected_attrib_cols <-
-        isolate(input$setup_subset_attrib_cols)
+      selected_attrib_cols <- isolate(input$setup_subset_attrib_cols)
       if (length(selected_attrib_cols) > 0) {
-        attribute(dataset) <-
-          get_selected_attribs(dataset, selected_attrib_cols)
+        attribute(dataset) <- get_selected_attribs(dataset, selected_attrib_cols)
       }
     }
     dataset

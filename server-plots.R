@@ -107,22 +107,14 @@ get_vi_plot <- function(dataset, input, output) {
     )
     p <- plotly::layout(p, showlegend = showlegend)
   } else {
-    p <- specalyzer::plot_vegindex(dataset,
-                                  index = vi,
-                                  by = byattribute,
-                                  type = 'all')
-    p <-
-      plotly::layout(p,
-                     showlegend = showlegend,
-                     legend = list(orientation = 'h'))
+    p <- specalyzer::plot_vegindex(dataset, index = vi, by = byattribute, type = 'all')
+    p <- plotly::layout(p, showlegend = showlegend, legend = list(orientation = 'h'))
   }
-  
   p <- plotly::layout(p, title = input$vi_plot_title)
   p
 }
 
 get_field_matrix_plot <- function(dataset, datapath, input, output) {
-  
   chosen_matrix <- input$plot_field_matrix
   if(is.null(chosen_matrix)) {
     stop("No field matrices available.")
@@ -143,9 +135,7 @@ get_field_matrix_plot <- function(dataset, datapath, input, output) {
   } else {
     stop()
   }
-  
   p 
-  
 }
 
 get_vegindex_field_plot <- function(dataset, index, field_layout_matrix) {

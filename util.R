@@ -173,21 +173,14 @@ spectral_data_matches_attribute_data <- function(spectral_data, attribute_data) 
 #' @return Sorted attribute data table
 #' @export
 sort_attribute_data <- function(attribute_data, spectral_data) {
-  
   # If the order of the attribute data rows matches the order of the
   # spectral data, then no sorting is required:
   if(all(idSpeclib(spectral_data) == attribute_data[['filename']])) {
     return(attribute_data)
   }
-
-  # print(attribute_data)  
-  # print(spectral_data)
   # If not, reorder the rows of the attribute data table to match the
   # order of samples in the speclib object 
   target_order <- idSpeclib(spectral_data)
-  
   new_order <- match(target_order, attribute_data[['filename']] %>% unlist)
-  
   attribute_data[new_order,]
-  
 }

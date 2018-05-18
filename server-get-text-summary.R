@@ -37,3 +37,6 @@ get_spectral_data_description <- function(data) {
   p("Specalyzer detected ", strong(nbr_samples), " spectral samples in the uploaded dataset, containing:",
     strong(nbr_bands), " bands in the wavelength range of ", strong(wvl_range, "nm"))
 }
+
+# TODO: Get this done
+get_fieldmap_data_description <- fucntion() {}

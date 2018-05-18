@@ -52,7 +52,6 @@ get_wavelengths <- function(data, wavelengths) {
 }
 
 get_masked_spectra <- function(data) {
-
   dropped_bands <- attr(data, "dropped")
   spectral_data <- spectra(data) %>% as.data.frame()
   colnames(spectral_data) <- wavelength(data)
@@ -106,3 +105,5 @@ get_all_NA_cols <- function(table) {
 calculate_all_vegindexes <- function(speclib_data) {
   specalyzer::vegindex(speclib_data, specalyzer::vegindex())
 }
+
+

@@ -26,7 +26,6 @@ get_vegindex_plot_ui <- function() {
         #   ),
         #   selected = "attribute"
         # ),
-        
           selectInput(
             "vi_plot_attribute_select",
             label = "Select attribute:",
@@ -62,8 +61,13 @@ get_vegindex_plot_ui <- function() {
               "Outliers" = "outliers",
               "Suspected outliers" = "suspectedoutliers"
             ),
-            selected = "none"
-            )
+            selected = "none"),
+          selectInput(
+            "vi_plot_boxplot_attribute_splitby",
+            label = "Split by a 2nd attribute?",
+            choices = "",
+            multiple = FALSE
+          )
         ),
         conditionalPanel(
           "input.vi_attrib_plot_type == 'scatter'",

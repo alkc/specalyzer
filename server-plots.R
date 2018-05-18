@@ -74,6 +74,7 @@ get_vi_plot <- function(dataset, input, output) {
   
   showlegend <- if(!is.null(by_size)) TRUE else FALSE
     # selected_plot_type <- input$vi_plot_by
+  splitby <- if(input$vi_plot_boxplot_attribute_splitby != "") input$vi_plot_boxplot_attribute_splitby else NULL
   byattribute <- if(input$vi_plot_attribute_select != "") input$vi_plot_attribute_select else NULL
   type <- input$vi_attrib_plot_type
   boxpoints <- input$vi_plot_boxplot_boxpoints
@@ -89,11 +90,12 @@ get_vi_plot <- function(dataset, input, output) {
   }
   
   if (input$vi_attrib_plot_type == 'boxplot') {
-    p <- specalyzer::plot_vegindex(
+    p <- specalyzer::plot_vegindex_boxplot(
       dataset,
       index = vi,
-      by = byattribute,
-      type = "boxplot",
+      group_by = byattribute,
+      split_by_attribute = splitby,
+      orientation = "v",
       boxpoints = boxpoints,
       jitter = jitter
     )

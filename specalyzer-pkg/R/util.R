@@ -106,4 +106,31 @@ calculate_all_vegindexes <- function(speclib_data) {
   specalyzer::vegindex(speclib_data, specalyzer::vegindex())
 }
 
-
+speclib_to_long_df <- function(speclib_data, attributes_to_group_by=NULL) {
+  wavelengths <- as.character(wavelength(speclib_data) )
+  extracted_spectra <- spectra(speclib_data)
+  extracted_spectra <- as.data.frame(extracted_spectra, stringsAsFactors = FALSE)
+  colnames(extracted_spectra) <- wavelengths
+  
+  if(is.null(attributes_to_group_by)) {
+    long_spectra <- melt(extracted_spectra, 
+                         direction = "long", 
+                         variable.name = "wavelength", 
+                         value.name = "reflectance")
+  } else {
+    attribute_data <- attribute(speclib_data)
+    for(attribute in attributes_to_group_by) {
+      attribute_vector <- attribute_data[[attribute]]
+      extracted_spectra[[attribute]] <- attribute_vector
+    }
+    long_spectra <- melt(extracted_spectra, 
+                         value.name = "reflectance", 
+                         id.vars = attributes_to_group_by, 
+                         variable.name = "wavelength") 
+  }
+  #Convert from probably factor:
+  long_spectra$wavelength <- as.numeric(as.character(long_spectra$wavelength))
+  # Return:
+  long_spectra
+  
+}

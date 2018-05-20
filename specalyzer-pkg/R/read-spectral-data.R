@@ -104,7 +104,7 @@ read_from_file_list <- function(file_list, file_format)  {
 get_processing_function <- function(spectral_data_format) {
 
   process_funcs <- c("long" = process_long_data,
-                    "wide" = spectral_data_format,
+                    "wide" = process_wide_data,
                     "spectrawiz" = process_spectrawiz_data,
                     "asd" = process_asd_data)
 

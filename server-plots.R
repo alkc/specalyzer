@@ -32,10 +32,6 @@ get_spectral_plot <- function(dataset, input, output) {
       individual <- FALSE
     }
     
-    # if(!is.null(mask_intervals)) {
-    #   spectral_plot_data <- mask_(spectral_plot_data, mask_intervals)
-    # }
-    
     specalyzer::plot_spectrum(
       spectral_plot_data, 
       aggregate_by = byattributes,
@@ -123,8 +119,6 @@ get_field_matrix_plot <- function(dataset, datapath, input, output) {
   }
   matrix_path <- chosen_matrix
   m <- read.csv(matrix_path, header = FALSE, stringsAsFactors = FALSE) %>% as.matrix()
-  # print(m)
-  # dataset %>% idSpeclib %>% print
   if(input$plot_field_type == "vegindex") {
     index <- input$plot_field_index
     if(input$plot_field_custom) {

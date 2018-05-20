@@ -26,6 +26,7 @@ plot_vegindex_selection <- function(speclib_data, attribute,
                   categoryarray = plot_data$correlation_coefficient,
                   tickangle = 45,
                   title = "")
+    yform <- list(title = "Pearson correlation coefficient")
   } else if(attribute_type == "categorical") {
     plot_data <- get_significant_indices(vi_table, as.factor(attribute_vector))
     plot_data <- plot_data[order(plot_data$log_ten_p),]
@@ -34,8 +35,9 @@ plot_vegindex_selection <- function(speclib_data, attribute,
                   categoryarray = plot_data$log_ten_p,
                   tickangle = 45,
                   title = "")
+    yform <- list(title = "-log10(p-value)")
   }
-  plotly::layout(p, xaxis = xform)
+  plotly::layout(p, xaxis = xform, yaxis=yform)
 }
 
 get_vegindex_attribute_correlations <- function(vi_table,attribute_vector, corr_method = "pearson") {

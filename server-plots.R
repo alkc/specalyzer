@@ -40,7 +40,8 @@ get_spectral_plot <- function(dataset, input, output) {
       plotly::layout(
         title = input$spec_plot_title,
         xaxis = list(title = input$spec_plot_xlab), 
-        yaxis = list(title = input$spec_plot_ylab))
+        yaxis = list(title = input$spec_plot_ylab),
+        font = list(size = 16))
 }
 
 get_vi_plot <- function(dataset, input, output) {
@@ -108,7 +109,7 @@ get_vi_plot <- function(dataset, input, output) {
     p <- specalyzer::plot_vegindex(dataset, index = vi, by = byattribute, type = 'all')
     p <- plotly::layout(p, showlegend = showlegend, legend = list(orientation = 'h'))
   }
-  p <- plotly::layout(p, title = input$vi_plot_title)
+  p <- plotly::layout(p, title = input$vi_plot_title, font = list(size = 16))
   p
 }
 
@@ -148,7 +149,7 @@ get_pca_plot <- function(dataset, input, output) {
   spec_pca <- get_spectral_pca(dataset, scale. = input$plot_pca_scale, 
                                center = input$plot_pca_center)
   plot_spectral_pca(spec_pca, data = dataset, color = color, size = size) %>% 
-    plotly::layout(title = input$plot_pca_title)
+    plotly::layout(title = input$plot_pca_title, font = list(size = 16))
 }
 
 get_outlier_plot <- function(dataset, input, output) {
@@ -156,12 +157,12 @@ get_outlier_plot <- function(dataset, input, output) {
                 sd_threshold = input$plot_pca_outlier_sd,
                 scale. = input$plot_pca_scale, 
                 center = input$plot_pca_center) %>% 
-    plotly::layout(title = input$plot_pca_title)
+    plotly::layout(title = input$plot_pca_title, font = list(size = 16), margin = list(t = 50))
 }
 
 get_vegindex_selection_plot <- function(dataset, input,output) {
   p <- plot_vegindex_selection(dataset, 
                                attribute = input$viselection_attr_select,
                                attribute_type = input$viselection_attr_type)
-  p
+  p %>% layout(font = list(size = 16), margin = list(b = 160), xaxis = list(tickangle = 45))
 }

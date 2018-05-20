@@ -24,7 +24,6 @@ available_indices <- specalyzer::vegindex()
 shinyServer(function(input, output, session) {
   user_data <- reactiveValues(id = NULL, path = NULL, available_samples = NULL, 
                               available_fieldmaps = NULL)
-  
   output$welcome_text <- renderUI({
     welcome_text <- includeMarkdown("content/welcome.md")
     if(data_exists()) {
@@ -32,7 +31,6 @@ shinyServer(function(input, output, session) {
     }
     welcome_text
   })
-  
   output$download_example_data <- downloadHandler(
       filename <- function(){
           paste("specalyzer-example-data", "zip", sep = ".")

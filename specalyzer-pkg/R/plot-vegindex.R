@@ -61,8 +61,12 @@ process_vegindex_plot <- function(p, plot_data, by_attribute, type, index) {
 
 #'@export
 plot_vegindex_boxplot <- function(speclib_data, index, group_by_attribute,
-                                  split_by_attribute = NULL, orientation = 'h', ...) {
+                                  split_by_attribute = NULL, ...) {
 
+  # TODO: Reimplement orientation. As of now broken. Plots come out looking
+  # weird when orientation = h. Might have smth to do with boxmode = group?
+  orientation = 'v'
+  
   main_attribute_name <- group_by_attribute
   main_attribute_vector <- get_attr_column(speclib_data, main_attribute_name)
   index_vector <- specalyzer::vegindex(speclib_data, index) %>% unlist()

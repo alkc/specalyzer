@@ -77,7 +77,7 @@ plot_vegindex_boxplot <- function(speclib_data, index, group_by_attribute,
     split_attribute_name <- split_by_attribute
   }
   if(orientation == 'v') {
-    p <- plot_ly(y=index_vector,x=main_attribute_vector,
+    p <- plot_ly(y=index_vector,x=as.factor(main_attribute_vector),
                  split = split_attribute_vector, type='box',...)
   } else if(orientation == 'h') {
     p <- plot_ly(x=index_vector,y=main_attribute_vector,

@@ -85,13 +85,10 @@ remove_selected_attribs <- function(data, attributes) {
   
   attributes <- vapply(attributes, function(x) paste0("-",x), 
                        FUN.VALUE = character(1), USE.NAMES = FALSE)
-  
-  hsdar::attribute(data) %>% 
-    select_(.dots = attributes)
+  hsdar::attribute(data) %>% select_(.dots = attributes)
 }
 
 remove_selected_rows <- function(data, sample_ids) {
-  
   kill_list <- !hsdar::idSpeclib(data) %in% sample_ids
   new_ids <- hsdar::idSpeclib(data)[kill_list]
   data <- data[kill_list]
@@ -103,30 +100,20 @@ get_plot_subset <- function(data, selected_attrib, values, is_range) {
   
   attribs <- hsdar::attribute(data)
   sample_ids <- hsdar::idSpeclib(data)
-  
   if(is_range) {
-    
     if(length(values) != 2) {
       stop("'values' should specify an interval")
     }
-    
     lwr_bound <- values[1]
     upr_bound <- values[2]
-    
     f <- function(x) lwr_bound <= x & x <= upr_bound
-    
     subset <- which(f(attribs[,selected_attrib]))
-    
   } else if(!is_range) {
-    
     f <- function(x) x %in% values
-    
     subset <- which(f(attribs[,selected_attrib]))
-    
   } else {
     stop("is_range should equal TRUE or FALSE")
   }
-  
   subset_data <- data[subset,]
   idSpeclib(subset_data) <- sample_ids[subset]
   subset_data

@@ -19,8 +19,6 @@ source("server-config.R")
 available_indices <- specalyzer::vegindex()
 
 # dev_mode <- FALSE
-
-
 shinyServer(function(input, output, session) {
   user_data <- reactiveValues(id = NULL, path = NULL, available_samples = NULL, 
                               available_fieldmaps = NULL)
@@ -228,26 +226,18 @@ shinyServer(function(input, output, session) {
   })
   
   output$field_matrix_plot <- renderPlotly({
-    
     validate(
       need(user_data$has_uploaded_fieldmaps == TRUE,
            "No fieldmaps have been uploaded. "))
-    
     if(input$plot_field_type == 'attribute') {
-      
       selected_attribute_is_numeric <-  specalyzer::get_attr_column(data(), input$plot_field_attribute) %>% 
         is.numeric()
-  
       validate(
         need(selected_attribute_is_numeric, 
              "specalyzer currently only supports numerical attributes in field plots")
       )
     }
-    
-    get_field_matrix_plot(dataset = data(),
-                          datapath = data_path(),
-                          input,
-                          output)
+    get_field_matrix_plot(dataset = data(), datapath = data_path(), input, output)
   })
   
   # Dynamic ui code ---------------------------------------------------------

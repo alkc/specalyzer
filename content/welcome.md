@@ -27,3 +27,6 @@ All uploaded user data is erased from the server 24 hours after the time of uplo
 "Specalyzer" is provided by the Department of Plant Breeding, Swedish University of Agricultural Sciences (SLU). "Specalyzer" is provided "as is" and SLU and its employees make no warranty, express or implied, as to the usefulness of the software/service and documentation for any purpose. By using "Specalyzer" you accept that under no cirumstances will SLU and its employees be liable for any kind of damages that may arise from using this software/service.
 
 ### Example data
+
+Example data for the long-, wide- and spectrawiz formats can be found at the 
+following link: https://github.com/alkc/specalyzer-example-data/raw/master/specalyzer-datasets.zip

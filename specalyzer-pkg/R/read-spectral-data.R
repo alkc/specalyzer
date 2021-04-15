@@ -93,11 +93,12 @@ read_from_file_list <- function(file_list, file_format)  {
 
   # Determine how to parse the input.
   data <- lapply(file_list, file_processing_function)
+  data <- purrr::map_dfr(data, as.data.frame)
 
   # Multiple datasets are reduced to one data.frame using rbind
-  if (length(data) > 1) {
-    data <- dplyr::bind_rows(data)
-  }
+  # if (length(data) > 1) {
+  #   data <- purrr::map_df(data, function(x) x)
+  # }
   data
 }
 
